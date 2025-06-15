@@ -14,6 +14,8 @@ export class MenubarComponent implements OnInit {
   items: MenuItem[] = [];
   itemUserFinalLogin: MenuItem[] = [];
   itemUserFinal: MenuItem[] = [];
+  token:string|null='';
+  role:string|null=''
 
   menuItems: MenuItem[] = [
     {
@@ -47,10 +49,20 @@ export class MenubarComponent implements OnInit {
     },
   ];
 
+   itemAdmin: MenuItem[]=[
+    {
+      label: 'Admin',
+      routerLink: '/admin',
+    },
+   ]
+
   constructor(private readonly loginService:LoginService){}
 
   ngOnInit(): void {
+    this.token=localStorage.getItem('token')
+    this.role=localStorage.getItem('role')
     this.items = this.menuItems;
+    this.items= this.role!==null && this.role!=='' ? this.items.concat(this.itemAdmin):this.items;
     this.itemUserFinal = this.itemUserSinLogin;
     this.itemUserFinalLogin = [
       {

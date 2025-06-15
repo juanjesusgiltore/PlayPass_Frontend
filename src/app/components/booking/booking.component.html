@@ -1,3 +1,39 @@
 <app-menubar></app-menubar>
 
+<div class="flex justify-center w-full my-4">
+  <p-multiselect
+    [options]="activities"
+    formControlName="activity"
+    optionLabel="name"
+    placeholder="Actividades"
+    [selectionLimit]="1"
+    styleClass="w-full md:w-80"
+    (onChange)="actualizarTabs($event)"
+  />
+</div>
+
+  <br>
+
+<div class="flex justify-center w-full">
+  <p-tabs value="0" class="w-full max-w-screen-lg">
+    <p-tablist class="w-full flex justify-center">
+      @for (tab of tabs; track tab.value) {
+        <p-tab [value]="tab.value" class="flex-1 text-center">
+          {{ tab.title }}
+        </p-tab>
+      }
+    </p-tablist>
+
+    <p-tabpanels class="w-full">
+      @for (tab of tabs; track tab.value) {
+        <p-tabpanel [value]="tab.value" class="w-full">
+          @for(sesion of tab.content; track $index){
+            <app-reservedcard [hour]="sesion.hour" [places]="sesion.places"></app-reservedcard>
+          }
+        </p-tabpanel>
+      }
+    </p-tabpanels>
+  </p-tabs>
+</div>
+
 <app-footer></app-footer>

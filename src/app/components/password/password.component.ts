@@ -54,7 +54,7 @@ export class PasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      username:new FormControl(null,[Validators.required]),
+      email:new FormControl(null,[Validators.required]),
       password:new FormControl(null,[Validators.required]),
       passwordConfirm:new FormControl(null,[Validators.required]),
 

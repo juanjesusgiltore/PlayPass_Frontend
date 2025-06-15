@@ -31,20 +31,20 @@ export const routes: Routes = [
     {
         path:'profile',
         component:ProfileComponent,
-        canActivate:[authGuard,roleGuard],
+        canActivate:[authGuard],
 
     },
     {
         path:'home',
         component:HomeLoginComponent,
-        canActivate:[authGuard,roleGuard],
+        canActivate:[authGuard],
 
 
     },
     {
         path:'booking',
         component:BookingComponent,
-        canActivate:[authGuard,roleGuard],
+        canActivate:[authGuard],
     },
     {
         path:'admin',

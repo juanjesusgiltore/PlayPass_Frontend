@@ -1,8 +1,12 @@
 <div class="card">
   <p-menubar [model]="items">
     <ng-template #end>
-            <!--Todo if si esta logeado-->
-        <p-menubar [model]="itemUserFinal"/>
+            @if(token!==null && token!==''){
+              <p-menubar [model]="itemUserFinalLogin"/>
+            }
+            @else {
+              <p-menubar [model]="itemUserFinal"/>
+            }
     </ng-template>
   </p-menubar>
 </div>

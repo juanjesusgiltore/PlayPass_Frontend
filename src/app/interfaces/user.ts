@@ -1,11 +1,21 @@
+import { CreditCard } from "./credit-card";
+
 export interface User {
-  id: number;
+  id: number,
 
-  name: string;
+  name: string,
 
-  email: string;
+  email: string,
 
-  password: string;
+  password: string,
 
-  phone: string;
+  phone: string,
+
+  modelSesion:string,
+
+  aviableSesions:number,
+
+  creditCard:CreditCard,
+
+  role:string
 }
