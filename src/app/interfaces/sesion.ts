@@ -3,9 +3,9 @@ import { Booking } from "./booking";
 export interface Sesion {
   id: number;
 
-  LocalDate: string;
+  date: string;
 
-  LocalTime: string;
+  time: string;
 
   places: number;
 

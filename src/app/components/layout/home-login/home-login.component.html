@@ -1,28 +1,65 @@
 <app-menubar></app-menubar>
-
-<section>
-
-</section>
-<section>
-
-</section>
-<section>
-    <p-carousel [value]="activitys" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
-    <ng-template let-activity #item>
-        <div class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4">
-            <div class="mb-4">
-                <div class="relative mx-auto">
-                    <img src="assets/{{activity.image}}" [alt]="" class="w-full rounded-border" />
-                </div>
-            </div>
-            <div class="mb-4 font-medium">{{ activity.name }}</div>
-            <div class="flex justify-between items-center">
-                <span>
-                    <p-button icon="pi pi-heart" severity="secondary" />
-                </span>
-            </div>
+<div class="flex justify-center items-start gap-6 flex-wrap mt-6">
+  <section class="w-[25rem]">
+    <p-card [style]="{ width: '100%', overflow: 'hidden' }">
+      <ng-template #title> Sesiones disponibles: {{ usuario.aviableSesions }} </ng-template>
+      <ng-template #footer>
+        <div class="flex gap-4 mt-1">
+          <p-button label="Elegir" class="w-full" styleClass="w-full" (onClick)="navegar('/sesionss')" />
         </div>
+      </ng-template>
+    </p-card>
+  </section>
+
+  <section class="w-[25rem]">
+    <p-card [style]="{ width: '100%', overflow: 'hidden' }">
+      <ng-template #title>
+        <h1>Reserva aquí</h1>
+      </ng-template>
+      <ng-template #footer>
+        <div class="flex gap-4 mt-1">
+          <p-button label="Reserva" class="w-full" styleClass="w-full" (onClick)="navegar('/booking')" />
+        </div>
+      </ng-template>
+    </p-card>
+  </section>
+</div>
+<br>
+<section>
+  <p-carousel
+    [value]="activitys"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="true"
+    [responsiveOptions]="responsiveOptions"
+    autoplayInterval="3000"
+  >
+    <ng-template let-activity #item>
+      <div
+        class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4"
+      >
+        <div class="mb-4">
+          <div class="relative mx-auto">
+            <img
+              src="assets/{{ activity.image }}"
+              [alt]=""
+              class="w-full rounded-border"
+            />
+          </div>
+        </div>
+        <div class="mb-4 font-medium">{{ activity.name }}</div>
+        <div class="flex justify-between items-center">
+          <span>
+            <p-button
+              icon="pi pi-heart"
+              severity="secondary"
+              label="Reserva"
+              (onClick)="reserva(activity)"
+            />
+          </span>
+        </div>
+      </div>
     </ng-template>
-</p-carousel>
+  </p-carousel>
 </section>
 <app-footer></app-footer>

@@ -18,7 +18,9 @@ import { finalize } from 'rxjs';
 import { Login } from '../../interfaces/login';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { User } from '../../interfaces/user';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Component({
@@ -49,11 +51,12 @@ export class LoginComponent implements OnInit {
     private readonly loginService: LoginService,
     private readonly fb: FormBuilder,
     private readonly messageService: MessageService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      username:new FormControl(null,[Validators.required]),
+      email:new FormControl(null,[Validators.required]),
       password:new FormControl(null,[Validators.required]),
     });
   }
@@ -71,10 +74,14 @@ export class LoginComponent implements OnInit {
           })
         )
         .subscribe({
-          next: (respone) => {},
+          next: (response) => {
+            this.loginService.setSession(response,jwtDecode<User>(response.accesToken).role)
+            this.router.navigate(['/home'])
+          },
 
           error: (err) => {
-            this.messageService.add({severity:'error',summary:'Error',detail:err.value,life:3000})
+            console.log(err)
+            this.messageService.add({severity:'error',summary:'Error',detail:err,life:3000})
           },
         });
     } else {
