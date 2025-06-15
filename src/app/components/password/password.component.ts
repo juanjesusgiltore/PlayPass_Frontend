@@ -19,11 +19,12 @@ import { Login } from '../../interfaces/login';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { RouterModule } from '@angular/router';
+import { Password } from '../../interfaces/password';
 
 
 @Component({
-  selector: 'app-login',
-  imports: [
+  selector: 'app-password',
+    imports: [
     ReactiveFormsModule,
     InputGroupModule,
     InputTextModule,
@@ -36,11 +37,11 @@ import { RouterModule } from '@angular/router';
     
   ],
   providers: [MessageService],
-
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  templateUrl: './password.component.html',
+  styleUrl: './password.component.css'
 })
-export class LoginComponent implements OnInit {
+export class PasswordComponent implements OnInit {
+
   formGroup!: FormGroup;
 
   loading: boolean = false;
@@ -55,14 +56,16 @@ export class LoginComponent implements OnInit {
     this.formGroup = this.fb.group({
       username:new FormControl(null,[Validators.required]),
       password:new FormControl(null,[Validators.required]),
+      passwordConfirm:new FormControl(null,[Validators.required]),
+
     });
   }
 
   login() {
-    if (this.formGroup.valid) {
+    if (this.formGroup.valid ) {
       this.loading = true;
-      let usuario:Login=this.formGroup.value;
-
+      let usuario:Password=this.formGroup.value;
+      if(usuario.password===usuario.passwordConfirm){
       this.loginService
         .login(usuario)
         .pipe(
@@ -77,7 +80,13 @@ export class LoginComponent implements OnInit {
             this.messageService.add({severity:'error',summary:'Error',detail:err.value,life:3000})
           },
         });
+      }else{
+        console.log(usuario)
+                this.loading = false;
+        this.messageService.add({severity:'error',summary:'Error',detail:'La contraseña no es la misma',life:3000})
+      }
     } else {
+      this.loading = false;
       this.messageService.add({severity:'error',summary:'Error',detail:'Falta usuario o contraseña',life:3000})
     }
   }
