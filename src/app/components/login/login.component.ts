@@ -19,8 +19,8 @@ import { Login } from '../../interfaces/login';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { Router, RouterModule } from '@angular/router';
-import { User } from '../../interfaces/user';
 import { jwtDecode } from 'jwt-decode';
+import { TokenResponse } from '../../interfaces/token-response';
 
 
 @Component({
@@ -75,13 +75,13 @@ export class LoginComponent implements OnInit {
         )
         .subscribe({
           next: (response) => {
-            this.loginService.setSession(response,jwtDecode<User>(response.accesToken).role)
+            this.loginService.setSession(response,jwtDecode<TokenResponse>(response.accesToken).role)
             this.router.navigate(['/home'])
           },
 
           error: (err) => {
-            console.log(err)
-            this.messageService.add({severity:'error',summary:'Error',detail:err,life:3000})
+            let error=err.error;
+            this.messageService.add({severity:'error',summary:'Error',detail:error,life:3000})
           },
         });
     } else {

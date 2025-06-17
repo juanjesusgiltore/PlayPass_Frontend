@@ -15,8 +15,12 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { LoginService } from '../../services/login/login.service';
+import { finalize } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+import { TokenResponse } from '../../interfaces/token-response';
 
 @Component({
   selector: 'app-register',
@@ -43,7 +47,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+    private readonly loginService: LoginService,
+    private readonly route: Router
   ) {}
 
   ngOnInit(): void {
@@ -58,26 +64,44 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.formGroup.valid) {
       this.loading = true;
-      let register: Register = this.formGroup.value;
-      register.Role = 'USER';
+      let data=this.formGroup.value
+      let register: Register ={
+        email: data.email,
+        password: data.password,
+        name: data.name,
+        phone: data.phone,
+        Role: 'USER',
+      } ;
 
-      /*this.loginService
-          .login(usuario)
-          .pipe(
-            finalize(() => {
-              this.loading = false;
-            })
-          )
-          .subscribe({
-            next: (respone) => {},
-  
-            error: (err) => {
-              this.messageService.add({severity:'error',summary:'Error',detail:err.value,life:3000})
-            },
-          });
-      } else {
-        this.messageService.add({severity:'error',summary:'Error',detail:'Falta usuario o contraseña',life:3000})
-      }*/
+      this.loginService
+        .register(register)
+        .pipe(
+          finalize(() => {
+            this.loading = false;
+          })
+        )
+        .subscribe({
+          next: (response) => {
+            this.loginService.setSession(response,jwtDecode<TokenResponse>(response.accesToken).role)
+            this.route.navigate(['/home']);
+          },
+
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err.value,
+              life: 3000,
+            });
+          },
+        });
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Falta usuario o contraseña',
+        life: 3000,
+      });
     }
   }
 }

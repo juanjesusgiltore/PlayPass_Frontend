@@ -24,17 +24,9 @@ export class MenubarComponent implements OnInit {
       routerLink: '/',
     },
     {
-      label: 'Actividades',
-      icon: 'pi pi-list',
-      items: [
-        {
-          label: '',
-        },
-      ],
-    },
-    {
       label: 'Sobre Nosotros',
       icon: 'pi pi-star',
+      routerLink:'/about-us'
     },
   ];
 
@@ -62,17 +54,13 @@ export class MenubarComponent implements OnInit {
     this.token=localStorage.getItem('token')
     this.role=localStorage.getItem('role')
     this.items = this.menuItems;
-    this.items= this.role!==null && this.role!=='' ? this.items.concat(this.itemAdmin):this.items;
+    this.items= this.role==='ADMIN' ? this.items.concat(this.itemAdmin):this.items;
     this.itemUserFinal = this.itemUserSinLogin;
     this.itemUserFinalLogin = [
       {
         label: 'Perfil',
         icon: 'pi pi-user',
         items: [
-          {
-            label: 'Perfil',
-            routerLink:'/profile'
-          },
           {
             label: 'Cerrar sesión',
             command: ()=>{

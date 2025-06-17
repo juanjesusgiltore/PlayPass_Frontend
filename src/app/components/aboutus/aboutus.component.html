@@ -1,0 +1,40 @@
+<app-menubar></app-menubar>
+
+<div class="about-us-container p-m-3">
+  <h2>Sobre Nosotros</h2>
+
+  <div class="p-grid p-align-center p-justify-center p-mb-4">
+    <div class="p-col-12 p-md-6">
+      <img src="/polideportivo.jfif" alt="Polideportivo" class="about-image" />
+    </div>
+    <div class="p-col-12 p-md-6">
+      <p class="about-text">
+        Bienvenido al <strong>PlayPass</strong>, un espacio diseñado para fomentar el deporte, la salud y el bienestar en nuestra comunidad. Contamos con modernas instalaciones
+        y un equipo comprometido con ofrecerte la mejor experiencia deportiva.
+      </p>
+      <p class="about-text">
+        Nuestra misión es facilitar el acceso a actividades deportivas para todas las edades,
+        promoviendo un estilo de vida activo y saludable.
+      </p>
+    </div>
+  </div>
+
+  <h3>Nuestro Equipo</h3>
+
+  <div class="p-grid p-justify-center">
+    @for(member of team; track $index){
+      <div class="p-col-12 p-md-4">
+        <div class="team-card">
+          <h4>{{ member.name }}</h4>
+          <p class="team-role">{{ member.role }}</p>
+          <p>{{ member.bio }}</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="team-footer">
+    Además contamos con más de <strong>50 entrenadores profesionales</strong>.
+  </div>
+</div>
+<app-footer></app-footer>
