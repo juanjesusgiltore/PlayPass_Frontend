@@ -1,0 +1,58 @@
+<div class="min-h-screen flex items-center justify-center">
+  <div class="card w-full max-w-md p-6 shadow-md">
+    <h1 class="text-2xl font-semibold mb-4 text-center">Registrate</h1>
+    <form [formGroup]="formGroup" class="flex flex-col gap-4">
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-at"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="email" />
+          <label for="Email">Email</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-floatlabel variant="on">
+        <p-password
+          [toggleMask]="true"
+          [feedback]="false"
+          formControlName="password"
+        />
+        <label for="password">Contraseña</label>
+      </p-floatlabel>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="name" />
+          <label for="Nombre">Nombre</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-phone"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <p-inputnumber
+            inputId="integeronly"
+            formControlName="phone"
+          />
+          <label for="phone">Telefono</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-toast />
+      <div class="flex justify-between items-center w-full">
+        <p-button
+          label="Registrar"
+          severity="success"
+          [loading]="loading"
+          (onClick)="register()"
+        ></p-button>
+      </div>
+    </form>
+  </div>
+</div>

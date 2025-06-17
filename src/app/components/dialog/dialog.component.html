@@ -1,0 +1,131 @@
+<div class="card flex justify-center">
+  <p-dialog
+    header="Editar Usuario"
+    [(visible)]="visible"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '50vw' }"
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="changeVisible(false)"
+  >
+  @if(formGroup){
+    <form [formGroup]="formGroup" class="flex flex-col gap-4">
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-at"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="email" />
+          <label for="Email">Email</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-floatlabel variant="on">
+        <p-password
+          [toggleMask]="true"
+          [feedback]="false"
+          formControlName="password"
+        />
+        <label for="password">Contraseña</label>
+      </p-floatlabel>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="name" />
+          <label for="Nombre">Nombre</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-phone"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <p-inputnumber
+            inputId="integeronly"
+            formControlName="phone"
+            [useGrouping]="false"
+          />
+          <label for="phone">Telefono</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+     
+
+       <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <p-inputnumber
+            inputId="integeronly"
+            [min]="0"
+            formControlName="aviableSesions"
+          />
+          <label for="aviableSesions">Sesiones</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      
+
+      <div class="flex justify-start w-full my-4">
+        <p-select
+          [options]="role"
+          formControlName="role"
+          placeholder="Rol"
+          styleClass="w-full md:w-80"
+        />
+      </div>
+
+       <div class="flex justify-star w-full my-4">
+        <p-select
+          [options]="modelSesions"
+          formControlName="modelSesion"
+          placeholder="Tipo de Sesiones"
+          styleClass="w-full md:w-80"
+        />
+      </div>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="cardHolderName" />
+          <label for="Nombre Tarjeta">Nombre Tarjeta</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="cardNumber" />
+          <label for="Numero Tarjeta">Numero Tarjeta</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="cvv" />
+          <label for="cvv">cvv</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+
+      <p-datepicker formControlName="expirationDate" [showIcon]="true" dateFormat="yy-mm-dd" />
+
+
+      <p-button label="Guardar" (onClick)="save()"></p-button>
+    </form>
+  }
+  </p-dialog>
+</div>

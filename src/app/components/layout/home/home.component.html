@@ -1,0 +1,89 @@
+<app-menubar></app-menubar>
+<section class="text-center py-16 bg-green-100">
+  <div class="max-w-5xl mx-auto px-4">
+    <img
+      src="/project.png"
+      alt="Polideportivo"
+      class="mx-auto max-w-sm h-auto"
+    />
+    <h1 class="text-4xl font-bold mb-4">
+      Bienvenido a PlayPass
+    </h1>
+    <p class="text-lg mb-6">
+      Reserva fácilmente tus sesiones deportivas desde casa.
+    </p>
+    
+    <p-button
+      label="Iniciar sesión"
+      (onClick)="enrutar('/login')"
+      icon="pi pi-sign-in"
+      class="mr-2"
+    />
+    <p-button
+      label="Registrarse"
+      (onClick)="enrutar('/register')"
+      severity="success"
+      icon="pi pi-user-plus"
+    />
+  </div>
+</section>
+
+<section class="py-12 px-4 bg-white">
+  <h2 class="text-2xl font-semibold text-center mb-8">
+    Actividades disponibles
+  </h2>
+  <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
+    <div>
+      <img
+        src="/futbol.jfif"
+        alt="Fútbol"
+        class="rounded-md mb-3 w-full h-48 object-cover"
+      />
+      <h3 class="text-xl font-semibold">Fútbol</h3>
+      <p class="text-sm">Reserva tu cancha para jugar con tus amigos.</p>
+    </div>
+
+    <div>
+      <img
+        src="/tenis.jfif"
+        alt="Tenis"
+        class="rounded-md mb-3 w-full h-48 object-cover"
+      />
+      <h3 class="text-xl font-semibold">Tenis</h3>
+      <p class="text-sm">Canchas individuales o dobles disponibles.</p>
+    </div>
+
+    <div>
+      <img
+        src="/gimnasio.jfif"
+        alt="Gimnasio"
+        class="rounded-md mb-3 w-full h-48 object-cover"
+      />
+      <h3 class="text-xl font-semibold">Gimnasio</h3>
+      <p class="text-sm">Entrena en un ambiente moderno y equipado.</p>
+    </div>
+  </div>
+  <br>
+          <h1 class="text-2xl font-bold text-center mt-6">¡Y mucho más!</h1>
+
+</section>
+
+<section class="bg-gray-100 py-10 text-center px-4">
+  <h2 class="text-2xl font-semibold mb-4">¿Cómo funciona?</h2>
+  <p class="max-w-2xl mx-auto text-sm">
+    Solo necesitas una cuenta para acceder al sistema. Podrás consultar
+    horarios, disponibilidad y reservar tus sesiones de forma rápida desde
+    cualquier dispositivo.
+  </p>
+</section>
+<section class="bg-green-50 py-10 text-center">
+  <h2 class="text-2xl font-semibold mb-4">Empieza hoy mismo</h2>
+  <p-button
+    label="Registrarse"
+    (onClick)="enrutar('/register')"
+    icon="pi pi-user-plus"
+    severity="success"
+  />
+</section>
+
+<app-footer></app-footer>

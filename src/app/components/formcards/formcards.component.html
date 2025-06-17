@@ -1,0 +1,57 @@
+<app-menubar></app-menubar>
+<div class="min-h-screen flex items-center justify-center">
+  <div class="card w-full max-w-md p-6 shadow-md">
+    <h1 class="text-2xl font-semibold mb-4 text-center">Compre la opcion que prefiera</h1>
+    <form [formGroup]="formGroup" class="flex flex-col gap-4">
+      <div class="flex justify-star w-full my-4">
+        <p-select
+          [options]="modelSesions"
+          formControlName="modelSesion"
+          placeholder="Tipo de Sesiones"
+          styleClass="w-full md:w-80"
+        />
+      </div>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="cardHolderName" />
+          <label for="Nombre Tarjeta">Nombre Tarjeta</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="cardNumber" />
+          <label for="Numero Tarjeta">Numero Tarjeta</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText formControlName="cvv" />
+          <label for="cvv">cvv</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+    <p-floatlabel variant="on">
+      <p-datepicker   formControlName="expirationDate" [minDate]="minDate" [showIcon]="true" dateFormat="yy-mm-dd" />
+            <label for="expirationDate">Fecha de caducidad</label>
+
+        </p-floatlabel>
+
+
+      <p-button label="Guardar" (onClick)="save()"></p-button>
+      
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>
