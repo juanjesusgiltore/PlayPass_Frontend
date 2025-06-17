@@ -28,7 +28,7 @@
       @for (tab of tabs; track tab.value) {
         <p-tabpanel [value]="tab.value" class="w-full">
           @for(sesion of tab.content; track $index){
-            <app-reservedcard [hour]="sesion.hour" [places]="sesion.places"></app-reservedcard>
+            <app-reservedcard [hour]="sesion.hour" [places]="sesion.places" [idSesion]="sesion.id" [bookings]="sesion.bookings"></app-reservedcard>
           }
         </p-tabpanel>
       }

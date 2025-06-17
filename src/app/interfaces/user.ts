@@ -1,3 +1,4 @@
+import { Booking } from "./booking";
 import { CreditCard } from "./credit-card";
 
 export interface User {
@@ -17,5 +18,7 @@ export interface User {
 
   creditCard:CreditCard,
 
-  role:string
+  role:string,
+
+  bookings?:Booking[]
 }

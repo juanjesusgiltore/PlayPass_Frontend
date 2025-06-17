@@ -8,6 +8,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ActivityService } from '../../services/activity/activity.service';
 import { Activity } from '../../interfaces/activity';
 import { ReservedcardComponent } from '../reservedcard/reservedcard.component';
+import { Booking } from '../../interfaces/booking';
 
 @Component({
   selector: 'app-booking',
@@ -33,20 +34,13 @@ export class BookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.activities = this.activityService.getActivitysLocal();
-    if (this.activities == null || this.activities.length === 0) {
-      this.activityService.getActivitys().subscribe({
-        next: (response) => {
-          this.activities = response;
-        },
-      });
-    } else {
-    }
   }
 
   actualizarTabs(activity: any) {
   let sesiones: Sesion[] = activity.value[0].sesions;
 
-  let sesionesPorDia = new Map<string, { hour: string; places: number }[]>();
+  
+  let sesionesPorDia = new Map<string, { hour: string; places: number;id:number;bookings:Booking[] }[]>();
 
   for (let sesion of sesiones) {
     let fecha = new Date(sesion.date);
@@ -60,6 +54,8 @@ export class BookingComponent implements OnInit {
     sesionesPorDia.get(dia)!.push({
       hour: hora,
       places: sesion.places,
+      id:sesion.id,
+      bookings:sesion.bookings
     });
   }
 
@@ -72,5 +68,7 @@ export class BookingComponent implements OnInit {
       content: sesionesDia,
     });
   }
-}
+this.tabs.forEach(tab => {
+  tab.content.sort((a, b) => a.hour.localeCompare(b.hour));
+});}
 }

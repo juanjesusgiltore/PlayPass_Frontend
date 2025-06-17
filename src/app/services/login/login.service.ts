@@ -13,7 +13,12 @@ export class LoginService {
 
   private readonly loginUrl:string='http://localhost:8080/auth/login';
 
-    private readonly registerUrl:string='http://localhost:8080/auth/register';
+  private readonly logoutUrl:string='http://localhost:8080/auth/logout';
+
+
+  private readonly registerUrl:string='http://localhost:8080/auth/register';
+
+  private readonly  passwordUrl:string='http://localhost:8080/auth/password';
 
 
   private readonly tokenKey:string='token';
@@ -28,8 +33,13 @@ export class LoginService {
     return this.http.post<Token>(this.loginUrl,credentials);
   }
 
-  register(credentials:Register):Observable<string>{
-    return this.http.post<string>(this.registerUrl,credentials)
+   password(credentials:Login):Observable<Token>{
+
+    return this.http.patch<Token>(this.passwordUrl,credentials);
+  }
+
+  register(credentials:Register):Observable<Token>{
+    return this.http.post<Token>(this.registerUrl,credentials)
   }
 
   setSession(token: Token, role: string) {
@@ -42,6 +52,7 @@ export class LoginService {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.roleKey);
     this.router.navigate(['/login']);
+    this.http.post<string>(this.logoutUrl,"");
   }
 
   isLoggedIn(): boolean {

@@ -5,7 +5,7 @@
       <ng-template #title> Sesiones disponibles: {{ usuario.aviableSesions }} </ng-template>
       <ng-template #footer>
         <div class="flex gap-4 mt-1">
-          <p-button label="Elegir" class="w-full" styleClass="w-full" (onClick)="navegar('/sesionss')" />
+          <p-button label="Elegir" class="w-full" styleClass="w-full" (onClick)="navegar('/shop')" />
         </div>
       </ng-template>
     </p-card>
@@ -26,6 +26,11 @@
 </div>
 <br>
 <section>
+  @if (loading) {
+    <div class="spinner-container" >
+    <p-progress-spinner></p-progress-spinner>
+  </div>
+  }@else {
   <p-carousel
     [value]="activitys"
     [numVisible]="3"
@@ -41,9 +46,9 @@
         <div class="mb-4">
           <div class="relative mx-auto">
             <img
-              src="assets/{{ activity.image }}"
+              src="/{{ activity.image }}"
               [alt]=""
-              class="w-full rounded-border"
+              class="w-64 h-40 object-cover rounded-border"
             />
           </div>
         </div>
@@ -61,5 +66,6 @@
       </div>
     </ng-template>
   </p-carousel>
+}
 </section>
 <app-footer></app-footer>

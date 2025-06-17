@@ -1,4 +1,4 @@
-<p-card class="p-mb-4 p-shadow-sm p-border border-gray-200 rounded-xl bg-gray-50">
+<p-card class="p-mb-4 p-shadow-sm p-border border-gray-200 rounded-xl bg-gray-50" (click)="open($event)">
   <div class="flex items-start">
     <!-- Izquierda: Hora -->
     <div class="flex-shrink-0 max-w-[150px]">
@@ -7,12 +7,18 @@
 
     <!-- Derecha: Reservas -->
     <div class="ml-auto">
-      @if(places > 0) {
+      @if(!reservado) {
         <div class="font-medium mb-2 text-gray-900">{{ places }}</div>
       }
       @else {
-        
+        <div class="font-medium mb-2 text-gray-900"><span class="pi pi-bookmark-fill"></span> {{ places }}</div>
       }
     </div>
   </div>
 </p-card>
+     
+  <div class="card flex justify-center gap-2">
+    <p-confirmdialog  />
+</div>
+
+ <p-toast />
